@@ -10,17 +10,17 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
 });
 
-const NAV: Array<{ to: string; label: string; exact?: boolean }> = [
+const NAV = [
   { to: "/admin", label: "Panel", exact: true },
-  { to: "/admin/keys", label: "API Keys" },
-  { to: "/admin/versions", label: "Versiones" },
-  { to: "/admin/users", label: "Usuarios" },
-  { to: "/admin/roles", label: "Roles y permisos" },
-  { to: "/admin/logs", label: "Logs" },
-  { to: "/admin/audit", label: "Auditoría" },
-  { to: "/admin/settings", label: "Configuración" },
-  { to: "/admin/docs", label: "Documentación" },
-];
+  { to: "/admin/keys", label: "API Keys", exact: false },
+  { to: "/admin/versions", label: "Versiones", exact: false },
+  { to: "/admin/users", label: "Usuarios", exact: false },
+  { to: "/admin/roles", label: "Roles y permisos", exact: false },
+  { to: "/admin/logs", label: "Logs", exact: false },
+  { to: "/admin/audit", label: "Auditoría", exact: false },
+  { to: "/admin/settings", label: "Configuración", exact: false },
+  { to: "/admin/docs", label: "Documentación", exact: false },
+] as const;
 
 function AdminLayout() {
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ function AdminLayout() {
             <Link
               key={item.to}
               to={item.to}
-              activeOptions={{ exact: item.exact ?? false }}
+              activeOptions={{ exact: item.exact }}
               className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[status=active]:bg-primary/10 data-[status=active]:font-medium data-[status=active]:text-primary"
             >
               {item.label}
