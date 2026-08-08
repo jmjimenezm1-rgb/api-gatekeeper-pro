@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminKeysRouteImport } from './routes/_authenticated/admin.keys'
+import { Route as AuthenticatedAdminLogsRouteImport } from './routes/_authenticated/admin.logs'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin.roles'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as AuthenticatedAdminVersionsRouteImport } from './routes/_authenticated/admin.versions'
@@ -54,6 +55,11 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
 const AuthenticatedAdminKeysRoute = AuthenticatedAdminKeysRouteImport.update({
   id: '/keys',
   path: '/keys',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminLogsRoute = AuthenticatedAdminLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/_authenticated/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/admin/versions': typeof AuthenticatedAdminVersionsRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin'
     | '/admin/keys'
+    | '/admin/logs'
     | '/admin/roles'
     | '/admin/users'
     | '/admin/versions'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin/keys'
+    | '/admin/logs'
     | '/admin/roles'
     | '/admin/users'
     | '/admin/versions'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin'
     | '/_authenticated/admin/keys'
+    | '/_authenticated/admin/logs'
     | '/_authenticated/admin/roles'
     | '/_authenticated/admin/users'
     | '/_authenticated/admin/versions'
@@ -279,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/keys'
       fullPath: '/admin/keys'
       preLoaderRoute: typeof AuthenticatedAdminKeysRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/logs': {
+      id: '/_authenticated/admin/logs'
+      path: '/logs'
+      fullPath: '/admin/logs'
+      preLoaderRoute: typeof AuthenticatedAdminLogsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/roles': {
@@ -363,6 +382,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminKeysRoute: typeof AuthenticatedAdminKeysRoute
+  AuthenticatedAdminLogsRoute: typeof AuthenticatedAdminLogsRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminVersionsRoute: typeof AuthenticatedAdminVersionsRoute
@@ -371,6 +391,7 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminKeysRoute: AuthenticatedAdminKeysRoute,
+  AuthenticatedAdminLogsRoute: AuthenticatedAdminLogsRoute,
   AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
   AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminVersionsRoute: AuthenticatedAdminVersionsRoute,
