@@ -1,11 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useNavigate,
-  useServerFn,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,7 +10,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
 });
 
-const NAV = [
+const NAV: Array<{ to: string; label: string; exact?: boolean }> = [
   { to: "/admin", label: "Panel", exact: true },
   { to: "/admin/keys", label: "API Keys" },
   { to: "/admin/versions", label: "Versiones" },
@@ -25,7 +20,7 @@ const NAV = [
   { to: "/admin/audit", label: "Auditoría" },
   { to: "/admin/settings", label: "Configuración" },
   { to: "/admin/docs", label: "Documentación" },
-] as const;
+];
 
 function AdminLayout() {
   const navigate = useNavigate();
