@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminKeysRouteImport } from './routes/_authenticated/admin.keys'
+import { Route as AuthenticatedAdminVersionsRouteImport } from './routes/_authenticated/admin.versions'
 import { Route as ApiPublicOpenapiDotjsonRouteImport } from './routes/api/public/openapi[.]json'
 import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/v1/permissions'
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
@@ -53,6 +54,12 @@ const AuthenticatedAdminKeysRoute = AuthenticatedAdminKeysRouteImport.update({
   path: '/keys',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminVersionsRoute =
+  AuthenticatedAdminVersionsRouteImport.update({
+    id: '/versions',
+    path: '/versions',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const ApiPublicOpenapiDotjsonRoute = ApiPublicOpenapiDotjsonRouteImport.update({
   id: '/api/public/openapi.json',
   path: '/api/public/openapi.json',
@@ -101,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/admin/versions': typeof AuthenticatedAdminVersionsRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -115,6 +123,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/admin/versions': typeof AuthenticatedAdminVersionsRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -132,6 +141,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/keys': typeof AuthenticatedAdminKeysRoute
+  '/_authenticated/admin/versions': typeof AuthenticatedAdminVersionsRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin'
     | '/admin/keys'
+    | '/admin/versions'
     | '/api/public/openapi.json'
     | '/admin/'
     | '/api/public/v1/permissions'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin/keys'
+    | '/admin/versions'
     | '/api/public/openapi.json'
     | '/admin'
     | '/api/public/v1/permissions'
@@ -179,6 +191,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin'
     | '/_authenticated/admin/keys'
+    | '/_authenticated/admin/versions'
     | '/api/public/openapi.json'
     | '/_authenticated/admin/'
     | '/api/public/v1/permissions'
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminKeysRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/versions': {
+      id: '/_authenticated/admin/versions'
+      path: '/versions'
+      fullPath: '/admin/versions'
+      preLoaderRoute: typeof AuthenticatedAdminVersionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/api/public/openapi.json': {
       id: '/api/public/openapi.json'
       path: '/api/public/openapi.json'
@@ -305,11 +325,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminKeysRoute: typeof AuthenticatedAdminKeysRoute
+  AuthenticatedAdminVersionsRoute: typeof AuthenticatedAdminVersionsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminKeysRoute: AuthenticatedAdminKeysRoute,
+  AuthenticatedAdminVersionsRoute: AuthenticatedAdminVersionsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
