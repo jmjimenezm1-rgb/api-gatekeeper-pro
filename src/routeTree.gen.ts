@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as ApiPublicOpenapiDotjsonRouteImport } from './routes/api/public/openapi[.]json'
 import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/v1/permissions'
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
@@ -40,6 +41,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 const ApiPublicOpenapiDotjsonRoute = ApiPublicOpenapiDotjsonRouteImport.update({
   id: '/api/public/openapi.json',
@@ -87,8 +93,9 @@ const ApiPublicV1UsersIdStatusRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -100,8 +107,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -115,8 +122,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -132,6 +140,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin'
     | '/api/public/openapi.json'
+    | '/admin/'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -143,8 +152,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
-    | '/admin'
     | '/api/public/openapi.json'
+    | '/admin'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin'
     | '/api/public/openapi.json'
+    | '/_authenticated/admin/'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -207,6 +217,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
     }
     '/api/public/openapi.json': {
       id: '/api/public/openapi.json'
@@ -267,12 +284,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
