@@ -196,6 +196,21 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
     requestExample: { name: "Auditor", description: "Solo lectura", permissions: ["usuarios.leer"] },
   },
   {
+    module: "versiones",
+    versions: ["v1"],
+    method: "GET",
+    path: "/versions",
+    operationId: "listVersions",
+    summary: "Listar versiones de la API",
+    description:
+      "Devuelve las versiones publicadas, su estado y la fecha de retirada prevista. Solo requiere una API Key válida.",
+    permission: null,
+    responseExample: {
+      success: true,
+      data: { items: [{ code: "v1", title: "Versión 1", status: "active", sunsetDate: null }], total: 1 },
+    },
+  },
+  {
     module: "permisos",
     versions: ["v1"],
     method: "GET",

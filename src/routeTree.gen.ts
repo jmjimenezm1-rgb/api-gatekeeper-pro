@@ -27,6 +27,7 @@ import { Route as ApiPublicOpenapiDotjsonRouteImport } from './routes/api/public
 import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/v1/permissions'
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
 import { Route as ApiPublicV1UsersRouteImport } from './routes/api/public/v1/users'
+import { Route as ApiPublicV1VersionsRouteImport } from './routes/api/public/v1/versions'
 import { Route as ApiPublicV1UsersIdIndexRouteImport } from './routes/api/public/v1/users.$id.index'
 import { Route as ApiPublicV1UsersIdPermissionsRouteImport } from './routes/api/public/v1/users.$id.permissions'
 import { Route as ApiPublicV1UsersIdRolesRouteImport } from './routes/api/public/v1/users.$id.roles'
@@ -123,6 +124,11 @@ const ApiPublicV1UsersRoute = ApiPublicV1UsersRouteImport.update({
   path: '/api/public/v1/users',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1VersionsRoute = ApiPublicV1VersionsRouteImport.update({
+  id: '/api/public/v1/versions',
+  path: '/api/public/v1/versions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1UsersIdIndexRoute = ApiPublicV1UsersIdIndexRouteImport.update({
   id: '/$id/',
   path: '/$id/',
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
+  '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -186,6 +193,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
+  '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -211,6 +219,7 @@ export interface FileRoutesById {
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
+  '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -236,6 +245,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
+    | '/api/public/v1/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
+    | '/api/public/v1/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -282,6 +293,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
+    | '/api/public/v1/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -297,6 +309,7 @@ export interface RootRouteChildren {
   ApiPublicV1PermissionsRoute: typeof ApiPublicV1PermissionsRoute
   ApiPublicV1RolesRoute: typeof ApiPublicV1RolesRoute
   ApiPublicV1UsersRoute: typeof ApiPublicV1UsersRouteWithChildren
+  ApiPublicV1VersionsRoute: typeof ApiPublicV1VersionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -427,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/versions': {
+      id: '/api/public/v1/versions'
+      path: '/api/public/v1/versions'
+      fullPath: '/api/public/v1/versions'
+      preLoaderRoute: typeof ApiPublicV1VersionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/users/$id/': {
       id: '/api/public/v1/users/$id/'
       path: '/$id'
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1PermissionsRoute: ApiPublicV1PermissionsRoute,
   ApiPublicV1RolesRoute: ApiPublicV1RolesRoute,
   ApiPublicV1UsersRoute: ApiPublicV1UsersRouteWithChildren,
+  ApiPublicV1VersionsRoute: ApiPublicV1VersionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
