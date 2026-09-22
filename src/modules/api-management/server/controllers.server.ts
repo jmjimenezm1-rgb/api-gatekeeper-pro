@@ -169,3 +169,27 @@ export function permissionsCollection(version: string) {
   });
   return { GET: (args: RouteArgs) => list(args) };
 }
+
+export function versionsCollection(version: string) {
+  const list = createApiEndpoint({
+    version,
+    endpoint: "/versions",
+    permission: null,
+    handler: async () => {
+      const { listVersions } = await import("./repositories.server");
+      const versions = await listVersions();
+      return {
+        data: {
+          items: versions.map((item) => ({
+            code: item.code,
+            title: item.title,
+            status: item.status,
+            sunsetDate: item.sunsetDate,
+          })),
+          total: versions.length,
+        },
+      };
+    },
+  });
+  return { GET: (args: RouteArgs) => list(args) };
+}

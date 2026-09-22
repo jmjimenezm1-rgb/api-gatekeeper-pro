@@ -22,6 +22,7 @@ import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as AuthenticatedAdminVersionsRouteImport } from './routes/_authenticated/admin.versions'
+import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
 import { Route as ApiPublicOpenapiDotjsonRouteImport } from './routes/api/public/openapi[.]json'
 import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/v1/permissions'
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
@@ -97,6 +98,11 @@ const AuthenticatedAdminVersionsRoute =
     path: '/versions',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicOpenapiDotjsonRoute = ApiPublicOpenapiDotjsonRouteImport.update({
   id: '/api/public/openapi.json',
   path: '/api/public/openapi.json',
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -173,6 +180,7 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -197,6 +205,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
@@ -221,6 +230,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/versions'
+    | '/api/public/health'
     | '/api/public/openapi.json'
     | '/admin/'
     | '/api/public/v1/permissions'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/versions'
+    | '/api/public/health'
     | '/api/public/openapi.json'
     | '/admin'
     | '/api/public/v1/permissions'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/users'
     | '/_authenticated/admin/versions'
+    | '/api/public/health'
     | '/api/public/openapi.json'
     | '/_authenticated/admin/'
     | '/api/public/v1/permissions'
@@ -280,6 +292,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
   ApiPublicOpenapiDotjsonRoute: typeof ApiPublicOpenapiDotjsonRoute
   ApiPublicV1PermissionsRoute: typeof ApiPublicV1PermissionsRoute
   ApiPublicV1RolesRoute: typeof ApiPublicV1RolesRoute
@@ -378,6 +391,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/versions'
       preLoaderRoute: typeof AuthenticatedAdminVersionsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/openapi.json': {
       id: '/api/public/openapi.json'
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
   ApiPublicOpenapiDotjsonRoute: ApiPublicOpenapiDotjsonRoute,
   ApiPublicV1PermissionsRoute: ApiPublicV1PermissionsRoute,
   ApiPublicV1RolesRoute: ApiPublicV1RolesRoute,
