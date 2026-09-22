@@ -10,7 +10,19 @@ export const Route = createFileRoute("/api/public/openapi.json")({
           "@/modules/api-management/server/repositories.server"
         );
 
-        const versions = (await listVersions()).filter((version) => version.status !== "disabled");
+        // Si la base de datos no responde, la especificación se publica con la
+        // versión base para que la documentación siga disponible.
+        let versions: Array<{
+          code: string;
+          status: "active" | "deprecated" | "disabled";
+          sunsetDate: string | null;
+          title: string;
+        }>;
+        try {
+          versions = (await listVersions()).filter((version) => version.status !== "disabled");
+        } catch {
+          versions = [{ code: "v1", status: "active", sunsetDate: null, title: "Versión 1" }];
+        }
         const document = buildOpenApiDocument({
           serverUrl: new URL(request.url).origin,
           versions: versions.map((version) => ({
