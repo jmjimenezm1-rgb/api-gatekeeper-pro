@@ -70,6 +70,21 @@ function LogsPage() {
       <PageHeader
         title="Logs de peticiones"
         description="Trazabilidad de cada llamada: identificador de petición, endpoint, versión, aplicación, duración y resultado."
+        actions={
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={!logs.data?.length}
+            onClick={() =>
+              downloadCsv(
+                `logs-${new Date().toISOString().slice(0, 10)}.csv`,
+                (logs.data ?? []) as unknown as Record<string, unknown>[],
+              )
+            }
+          >
+            Exportar CSV
+          </Button>
+        }
       />
 
       <form
