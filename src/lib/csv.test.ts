@@ -7,6 +7,6 @@ describe("toCsv", () => {
     expect(toCsv([{ a: 'x;"y"', b: null }])).toBe('a;b\r\n"x;""y""";');
   });
   it("serializa objetos como JSON", () => {
-    expect(toCsv([{ v: { k: 1 } }])).toBe('v\r\n{"k":1}');
+    expect(toCsv([{ v: { k: 1 } }])).toBe('v\r\n"{""k"":1}"');
   });
 });
