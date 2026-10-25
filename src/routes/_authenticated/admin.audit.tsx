@@ -1,3 +1,4 @@
+import { downloadCsv } from "@/lib/csv";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
@@ -50,6 +51,21 @@ function AuditPage() {
       <PageHeader
         title="Auditoría"
         description="Registro inmutable de cambios: quién hizo qué, sobre qué entidad, con el valor anterior y el nuevo."
+        actions={
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={!audit.data?.length}
+            onClick={() =>
+              downloadCsv(
+                `auditoria-${new Date().toISOString().slice(0, 10)}.csv`,
+                (audit.data ?? []) as unknown as Record<string, unknown>[],
+              )
+            }
+          >
+            Exportar CSV
+          </Button>
+        }
       />
 
       <form
