@@ -28,10 +28,18 @@ import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
 import { Route as ApiPublicV1UsersRouteImport } from './routes/api/public/v1/users'
 import { Route as ApiPublicV1VersionsRouteImport } from './routes/api/public/v1/versions'
+import { Route as ApiPublicV2PermissionsRouteImport } from './routes/api/public/v2/permissions'
+import { Route as ApiPublicV2RolesRouteImport } from './routes/api/public/v2/roles'
+import { Route as ApiPublicV2UsersRouteImport } from './routes/api/public/v2/users'
+import { Route as ApiPublicV2VersionsRouteImport } from './routes/api/public/v2/versions'
 import { Route as ApiPublicV1UsersIdIndexRouteImport } from './routes/api/public/v1/users.$id.index'
 import { Route as ApiPublicV1UsersIdPermissionsRouteImport } from './routes/api/public/v1/users.$id.permissions'
 import { Route as ApiPublicV1UsersIdRolesRouteImport } from './routes/api/public/v1/users.$id.roles'
 import { Route as ApiPublicV1UsersIdStatusRouteImport } from './routes/api/public/v1/users.$id.status'
+import { Route as ApiPublicV2UsersIdIndexRouteImport } from './routes/api/public/v2/users.$id.index'
+import { Route as ApiPublicV2UsersIdPermissionsRouteImport } from './routes/api/public/v2/users.$id.permissions'
+import { Route as ApiPublicV2UsersIdRolesRouteImport } from './routes/api/public/v2/users.$id.roles'
+import { Route as ApiPublicV2UsersIdStatusRouteImport } from './routes/api/public/v2/users.$id.status'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -129,6 +137,26 @@ const ApiPublicV1VersionsRoute = ApiPublicV1VersionsRouteImport.update({
   path: '/api/public/v1/versions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV2PermissionsRoute = ApiPublicV2PermissionsRouteImport.update({
+  id: '/api/public/v2/permissions',
+  path: '/api/public/v2/permissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV2RolesRoute = ApiPublicV2RolesRouteImport.update({
+  id: '/api/public/v2/roles',
+  path: '/api/public/v2/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV2UsersRoute = ApiPublicV2UsersRouteImport.update({
+  id: '/api/public/v2/users',
+  path: '/api/public/v2/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV2VersionsRoute = ApiPublicV2VersionsRouteImport.update({
+  id: '/api/public/v2/versions',
+  path: '/api/public/v2/versions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1UsersIdIndexRoute = ApiPublicV1UsersIdIndexRouteImport.update({
   id: '/$id/',
   path: '/$id/',
@@ -151,6 +179,28 @@ const ApiPublicV1UsersIdStatusRoute =
     path: '/$id/status',
     getParentRoute: () => ApiPublicV1UsersRoute,
   } as any)
+const ApiPublicV2UsersIdIndexRoute = ApiPublicV2UsersIdIndexRouteImport.update({
+  id: '/$id/',
+  path: '/$id/',
+  getParentRoute: () => ApiPublicV2UsersRoute,
+} as any)
+const ApiPublicV2UsersIdPermissionsRoute =
+  ApiPublicV2UsersIdPermissionsRouteImport.update({
+    id: '/$id/permissions',
+    path: '/$id/permissions',
+    getParentRoute: () => ApiPublicV2UsersRoute,
+  } as any)
+const ApiPublicV2UsersIdRolesRoute = ApiPublicV2UsersIdRolesRouteImport.update({
+  id: '/$id/roles',
+  path: '/$id/roles',
+  getParentRoute: () => ApiPublicV2UsersRoute,
+} as any)
+const ApiPublicV2UsersIdStatusRoute =
+  ApiPublicV2UsersIdStatusRouteImport.update({
+    id: '/$id/status',
+    path: '/$id/status',
+    getParentRoute: () => ApiPublicV2UsersRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -171,10 +221,18 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
   '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
+  '/api/public/v2/permissions': typeof ApiPublicV2PermissionsRoute
+  '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
+  '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
+  '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
+  '/api/public/v2/users/$id/permissions': typeof ApiPublicV2UsersIdPermissionsRoute
+  '/api/public/v2/users/$id/roles': typeof ApiPublicV2UsersIdRolesRoute
+  '/api/public/v2/users/$id/status': typeof ApiPublicV2UsersIdStatusRoute
   '/api/public/v1/users/$id/': typeof ApiPublicV1UsersIdIndexRoute
+  '/api/public/v2/users/$id/': typeof ApiPublicV2UsersIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -194,10 +252,18 @@ export interface FileRoutesByTo {
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
   '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
+  '/api/public/v2/permissions': typeof ApiPublicV2PermissionsRoute
+  '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
+  '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
+  '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
+  '/api/public/v2/users/$id/permissions': typeof ApiPublicV2UsersIdPermissionsRoute
+  '/api/public/v2/users/$id/roles': typeof ApiPublicV2UsersIdRolesRoute
+  '/api/public/v2/users/$id/status': typeof ApiPublicV2UsersIdStatusRoute
   '/api/public/v1/users/$id': typeof ApiPublicV1UsersIdIndexRoute
+  '/api/public/v2/users/$id': typeof ApiPublicV2UsersIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -220,10 +286,18 @@ export interface FileRoutesById {
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
   '/api/public/v1/versions': typeof ApiPublicV1VersionsRoute
+  '/api/public/v2/permissions': typeof ApiPublicV2PermissionsRoute
+  '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
+  '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
+  '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
+  '/api/public/v2/users/$id/permissions': typeof ApiPublicV2UsersIdPermissionsRoute
+  '/api/public/v2/users/$id/roles': typeof ApiPublicV2UsersIdRolesRoute
+  '/api/public/v2/users/$id/status': typeof ApiPublicV2UsersIdStatusRoute
   '/api/public/v1/users/$id/': typeof ApiPublicV1UsersIdIndexRoute
+  '/api/public/v2/users/$id/': typeof ApiPublicV2UsersIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -246,10 +320,18 @@ export interface FileRouteTypes {
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
     | '/api/public/v1/versions'
+    | '/api/public/v2/permissions'
+    | '/api/public/v2/roles'
+    | '/api/public/v2/users'
+    | '/api/public/v2/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
+    | '/api/public/v2/users/$id/permissions'
+    | '/api/public/v2/users/$id/roles'
+    | '/api/public/v2/users/$id/status'
     | '/api/public/v1/users/$id/'
+    | '/api/public/v2/users/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -269,10 +351,18 @@ export interface FileRouteTypes {
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
     | '/api/public/v1/versions'
+    | '/api/public/v2/permissions'
+    | '/api/public/v2/roles'
+    | '/api/public/v2/users'
+    | '/api/public/v2/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
+    | '/api/public/v2/users/$id/permissions'
+    | '/api/public/v2/users/$id/roles'
+    | '/api/public/v2/users/$id/status'
     | '/api/public/v1/users/$id'
+    | '/api/public/v2/users/$id'
   id:
     | '__root__'
     | '/'
@@ -294,10 +384,18 @@ export interface FileRouteTypes {
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
     | '/api/public/v1/versions'
+    | '/api/public/v2/permissions'
+    | '/api/public/v2/roles'
+    | '/api/public/v2/users'
+    | '/api/public/v2/versions'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
+    | '/api/public/v2/users/$id/permissions'
+    | '/api/public/v2/users/$id/roles'
+    | '/api/public/v2/users/$id/status'
     | '/api/public/v1/users/$id/'
+    | '/api/public/v2/users/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -310,6 +408,10 @@ export interface RootRouteChildren {
   ApiPublicV1RolesRoute: typeof ApiPublicV1RolesRoute
   ApiPublicV1UsersRoute: typeof ApiPublicV1UsersRouteWithChildren
   ApiPublicV1VersionsRoute: typeof ApiPublicV1VersionsRoute
+  ApiPublicV2PermissionsRoute: typeof ApiPublicV2PermissionsRoute
+  ApiPublicV2RolesRoute: typeof ApiPublicV2RolesRoute
+  ApiPublicV2UsersRoute: typeof ApiPublicV2UsersRouteWithChildren
+  ApiPublicV2VersionsRoute: typeof ApiPublicV2VersionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -447,6 +549,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1VersionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v2/permissions': {
+      id: '/api/public/v2/permissions'
+      path: '/api/public/v2/permissions'
+      fullPath: '/api/public/v2/permissions'
+      preLoaderRoute: typeof ApiPublicV2PermissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v2/roles': {
+      id: '/api/public/v2/roles'
+      path: '/api/public/v2/roles'
+      fullPath: '/api/public/v2/roles'
+      preLoaderRoute: typeof ApiPublicV2RolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v2/users': {
+      id: '/api/public/v2/users'
+      path: '/api/public/v2/users'
+      fullPath: '/api/public/v2/users'
+      preLoaderRoute: typeof ApiPublicV2UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v2/versions': {
+      id: '/api/public/v2/versions'
+      path: '/api/public/v2/versions'
+      fullPath: '/api/public/v2/versions'
+      preLoaderRoute: typeof ApiPublicV2VersionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/users/$id/': {
       id: '/api/public/v1/users/$id/'
       path: '/$id'
@@ -474,6 +604,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/public/v1/users/$id/status'
       preLoaderRoute: typeof ApiPublicV1UsersIdStatusRouteImport
       parentRoute: typeof ApiPublicV1UsersRoute
+    }
+    '/api/public/v2/users/$id/': {
+      id: '/api/public/v2/users/$id/'
+      path: '/$id'
+      fullPath: '/api/public/v2/users/$id/'
+      preLoaderRoute: typeof ApiPublicV2UsersIdIndexRouteImport
+      parentRoute: typeof ApiPublicV2UsersRoute
+    }
+    '/api/public/v2/users/$id/permissions': {
+      id: '/api/public/v2/users/$id/permissions'
+      path: '/$id/permissions'
+      fullPath: '/api/public/v2/users/$id/permissions'
+      preLoaderRoute: typeof ApiPublicV2UsersIdPermissionsRouteImport
+      parentRoute: typeof ApiPublicV2UsersRoute
+    }
+    '/api/public/v2/users/$id/roles': {
+      id: '/api/public/v2/users/$id/roles'
+      path: '/$id/roles'
+      fullPath: '/api/public/v2/users/$id/roles'
+      preLoaderRoute: typeof ApiPublicV2UsersIdRolesRouteImport
+      parentRoute: typeof ApiPublicV2UsersRoute
+    }
+    '/api/public/v2/users/$id/status': {
+      id: '/api/public/v2/users/$id/status'
+      path: '/$id/status'
+      fullPath: '/api/public/v2/users/$id/status'
+      preLoaderRoute: typeof ApiPublicV2UsersIdStatusRouteImport
+      parentRoute: typeof ApiPublicV2UsersRoute
     }
   }
 }
@@ -533,6 +691,23 @@ const ApiPublicV1UsersRouteChildren: ApiPublicV1UsersRouteChildren = {
 const ApiPublicV1UsersRouteWithChildren =
   ApiPublicV1UsersRoute._addFileChildren(ApiPublicV1UsersRouteChildren)
 
+interface ApiPublicV2UsersRouteChildren {
+  ApiPublicV2UsersIdPermissionsRoute: typeof ApiPublicV2UsersIdPermissionsRoute
+  ApiPublicV2UsersIdRolesRoute: typeof ApiPublicV2UsersIdRolesRoute
+  ApiPublicV2UsersIdStatusRoute: typeof ApiPublicV2UsersIdStatusRoute
+  ApiPublicV2UsersIdIndexRoute: typeof ApiPublicV2UsersIdIndexRoute
+}
+
+const ApiPublicV2UsersRouteChildren: ApiPublicV2UsersRouteChildren = {
+  ApiPublicV2UsersIdPermissionsRoute: ApiPublicV2UsersIdPermissionsRoute,
+  ApiPublicV2UsersIdRolesRoute: ApiPublicV2UsersIdRolesRoute,
+  ApiPublicV2UsersIdStatusRoute: ApiPublicV2UsersIdStatusRoute,
+  ApiPublicV2UsersIdIndexRoute: ApiPublicV2UsersIdIndexRoute,
+}
+
+const ApiPublicV2UsersRouteWithChildren =
+  ApiPublicV2UsersRoute._addFileChildren(ApiPublicV2UsersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -543,6 +718,10 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1RolesRoute: ApiPublicV1RolesRoute,
   ApiPublicV1UsersRoute: ApiPublicV1UsersRouteWithChildren,
   ApiPublicV1VersionsRoute: ApiPublicV1VersionsRoute,
+  ApiPublicV2PermissionsRoute: ApiPublicV2PermissionsRoute,
+  ApiPublicV2RolesRoute: ApiPublicV2RolesRoute,
+  ApiPublicV2UsersRoute: ApiPublicV2UsersRouteWithChildren,
+  ApiPublicV2VersionsRoute: ApiPublicV2VersionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
