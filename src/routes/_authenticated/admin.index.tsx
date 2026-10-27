@@ -3,7 +3,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getDashboard } from "@/modules/api-management/admin/admin.functions";
+import { getDashboard, getUsageAlerts } from "@/modules/api-management/admin/admin.functions";
+import type { UsageAlert, UsageWindow } from "@/modules/api-management/domain/usage-alerts";
+
+const WINDOW_LABEL: Record<UsageWindow, string> = { minute: "minuto", hour: "hora", day: "día" };
 import {
   BarList,
   DataTable,
@@ -41,6 +44,12 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 
 function DashboardPage() {
   const fetchDashboard = useServerFn(getDashboard);
+  const fetchAlerts = useServerFn(getUsageAlerts);
+  const alerts = useQuery({
+    queryKey: ["admin", "usage-alerts"],
+    queryFn: () => fetchAlerts() as Promise<unknown> as Promise<UsageAlert[]>,
+    refetchInterval: 30_000,
+  });
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "dashboard"],
     queryFn: () => fetchDashboard(),
@@ -52,6 +61,33 @@ function DashboardPage() {
         title="Panel de control"
         description="Actividad de la API en los últimos 7 días: volumen, errores, rendimiento y estado de claves y versiones."
       />
+
+      <Panel title="Alertas de uso (claves al 80% o más de su límite)">
+        {!alerts.data?.length ? (
+          <p className="text-sm text-muted-foreground">Ninguna clave cerca de su límite.</p>
+        ) : (
+          <ul className="space-y-2">
+            {alerts.data.map((alert) => (
+              <li
+                key={`${alert.apiKeyId}-${alert.window}`}
+                className="flex flex-wrap items-center justify-between gap-2 text-sm"
+              >
+                <span>
+                  <span className="font-medium">{alert.keyName}</span>{" "}
+                  <span className="font-mono text-xs text-muted-foreground">{alert.keyPrefix}</span>
+                </span>
+                <span className="flex items-center gap-2">
+                  {alert.hits}/{alert.limit} por {WINDOW_LABEL[alert.window]}
+                  <StateBadge
+                    label={alert.severity === "exceeded" ? "Límite superado" : `${alert.percent}%`}
+                    tone={alert.severity === "exceeded" ? "danger" : "warn"}
+                  />
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Panel>
 
       {error ? (
         <p className="text-sm text-destructive">{(error as Error).message}</p>
@@ -69,6 +105,7 @@ function DashboardPage() {
               hint={`${data.versions.length} definidas`}
             />
           </section>
+
 
           <section className="grid gap-4 lg:grid-cols-2">
             <Panel title="Llamadas por versión">
