@@ -166,6 +166,38 @@ export const getDashboard = createServerFn({ method: "GET" })
     };
   });
 
+export const getUsageAlerts = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const ctx = await assertAdmin(context as unknown as SupabaseCtx);
+    const { computeUsageAlerts } = await import("../domain/usage-alerts");
+    const now = new Date();
+    const minute = new Date(now); minute.setSeconds(0, 0);
+    const hour = new Date(now); hour.setMinutes(0, 0, 0);
+    const day = new Date(now); day.setHours(0, 0, 0, 0);
+    const keys = unwrap<any[]>(
+      await ctx.supabase
+        .from("api_keys")
+        .select("id, name, key_prefix, rate_limit_per_minute, rate_limit_per_hour, rate_limit_per_day")
+        .eq("status", "active"),
+      "alerts.keys",
+    );
+    const counters = unwrap<any[]>(
+      await ctx.supabase
+        .from("api_rate_counters")
+        .select("api_key_id, window_kind, window_start, hits")
+        .gte("window_start", day.toISOString()),
+      "alerts.counters",
+    );
+    const current = counters.filter((counter) => {
+      const start = new Date(counter.window_start).getTime();
+      const expected =
+        counter.window_kind === "minute" ? minute : counter.window_kind === "hour" ? hour : day;
+      return start === expected.getTime();
+    });
+    return computeUsageAlerts(keys, current) as unknown as JsonRecord[];
+  });
+
 /* -------------------------------- API Keys ----------------------------- */
 
 export const listApiKeys = createServerFn({ method: "GET" })
