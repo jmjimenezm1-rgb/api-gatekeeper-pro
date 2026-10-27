@@ -29,7 +29,7 @@ export interface EndpointDefinition {
 export const API_ENDPOINTS: EndpointDefinition[] = [
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/users",
     operationId: "listUsers",
@@ -65,7 +65,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "POST",
     path: "/users",
     operationId: "createUser",
@@ -83,7 +83,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/users/{id}",
     operationId: "getUser",
@@ -94,7 +94,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "PATCH",
     path: "/users/{id}",
     operationId: "updateUser",
@@ -106,7 +106,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "DELETE",
     path: "/users/{id}",
     operationId: "deleteUser",
@@ -118,7 +118,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/users/{id}/status",
     operationId: "getUserStatus",
@@ -129,7 +129,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "PATCH",
     path: "/users/{id}/status",
     operationId: "changeUserStatus",
@@ -142,7 +142,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/users/{id}/roles",
     operationId: "getUserRoles",
@@ -153,7 +153,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "PUT",
     path: "/users/{id}/roles",
     operationId: "setUserRoles",
@@ -165,7 +165,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "usuarios",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/users/{id}/permissions",
     operationId: "getUserPermissions",
@@ -176,7 +176,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "roles",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/roles",
     operationId: "listRoles",
@@ -186,7 +186,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "roles",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "POST",
     path: "/roles",
     operationId: "createRole",
@@ -197,7 +197,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "versiones",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/versions",
     operationId: "listVersions",
@@ -212,7 +212,7 @@ export const API_ENDPOINTS: EndpointDefinition[] = [
   },
   {
     module: "permisos",
-    versions: ["v1"],
+    versions: ["v1", "v2"],
     method: "GET",
     path: "/permissions",
     operationId: "listPermissions",
