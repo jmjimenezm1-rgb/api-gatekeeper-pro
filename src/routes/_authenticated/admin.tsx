@@ -18,6 +18,7 @@ const NAV = [
   { to: "/admin/roles", label: "Roles y permisos", exact: false },
   { to: "/admin/logs", label: "Logs", exact: false },
   { to: "/admin/audit", label: "Auditoría", exact: false },
+  { to: "/admin/diagnose", label: "Diagnóstico", exact: false },
   { to: "/admin/settings", label: "Configuración", exact: false },
   { to: "/admin/docs", label: "Documentación", exact: false },
 ] as const;

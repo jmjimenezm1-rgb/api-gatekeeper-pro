@@ -6,6 +6,7 @@
  * de datos siguen aplicándose como segunda capa de defensa.
  */
 import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
@@ -657,4 +658,30 @@ export const saveApiSettings = createServerFn({ method: "POST" })
       newValue: data,
     });
     return { ok: true };
+  });
+
+/* ------------------------- Diagnóstico con IA -------------------------- */
+
+const diagnoseInputSchema = z.object({
+  request: z.string().trim().min(1, "Pega la petición fallida").max(20_000),
+  response: z.string().trim().min(1, "Pega la respuesta recibida").max(20_000),
+});
+
+export const diagnoseFailedRequest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => diagnoseInputSchema.parse(input))
+  .handler(async ({ data, context }) => {
+    const ctx = await assertAdmin(context as unknown as SupabaseCtx);
+    const { explainFailedRequest } = await import("../server/diagnose.server");
+    const explanation = await explainFailedRequest({
+      request: data.request,
+      response: data.response,
+    });
+    await writeAudit(ctx, {
+      action: "diagnose.request",
+      entityType: "request_log",
+      entityId: null,
+      newValue: { requestLength: data.request.length, responseLength: data.response.length },
+    });
+    return { explanation };
   });
