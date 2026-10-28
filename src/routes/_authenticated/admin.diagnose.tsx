@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -87,8 +88,8 @@ function DiagnosePage() {
       {explanation ? (
         <section className="rounded-lg border border-border bg-card p-4">
           <h2 className="mb-3 text-sm font-semibold text-foreground">Diagnóstico</h2>
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground">
-            {explanation}
+          <div className="prose prose-sm max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-code:text-foreground">
+            <ReactMarkdown>{explanation}</ReactMarkdown>
           </div>
         </section>
       ) : null}
