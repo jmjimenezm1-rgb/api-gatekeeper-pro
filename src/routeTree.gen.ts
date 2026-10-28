@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
+import { Route as AuthenticatedAdminDiagnoseRouteImport } from './routes/_authenticated/admin.diagnose'
 import { Route as AuthenticatedAdminDocsRouteImport } from './routes/_authenticated/admin.docs'
 import { Route as AuthenticatedAdminKeysRouteImport } from './routes/_authenticated/admin.keys'
 import { Route as AuthenticatedAdminLogsRouteImport } from './routes/_authenticated/admin.logs'
@@ -70,6 +71,12 @@ const AuthenticatedAdminAuditRoute = AuthenticatedAdminAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminDiagnoseRoute =
+  AuthenticatedAdminDiagnoseRouteImport.update({
+    id: '/diagnose',
+    path: '/diagnose',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminDocsRoute = AuthenticatedAdminDocsRouteImport.update({
   id: '/docs',
   path: '/docs',
@@ -207,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
+  '/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/admin/docs': typeof AuthenticatedAdminDocsRoute
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
   '/admin/logs': typeof AuthenticatedAdminLogsRoute
@@ -238,6 +246,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
+  '/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/admin/docs': typeof AuthenticatedAdminDocsRoute
   '/admin/keys': typeof AuthenticatedAdminKeysRoute
   '/admin/logs': typeof AuthenticatedAdminLogsRoute
@@ -272,6 +281,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
+  '/_authenticated/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/_authenticated/admin/docs': typeof AuthenticatedAdminDocsRoute
   '/_authenticated/admin/keys': typeof AuthenticatedAdminKeysRoute
   '/_authenticated/admin/logs': typeof AuthenticatedAdminLogsRoute
@@ -306,6 +316,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin'
     | '/admin/audit'
+    | '/admin/diagnose'
     | '/admin/docs'
     | '/admin/keys'
     | '/admin/logs'
@@ -337,6 +348,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin/audit'
+    | '/admin/diagnose'
     | '/admin/docs'
     | '/admin/keys'
     | '/admin/logs'
@@ -370,6 +382,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin'
     | '/_authenticated/admin/audit'
+    | '/_authenticated/admin/diagnose'
     | '/_authenticated/admin/docs'
     | '/_authenticated/admin/keys'
     | '/_authenticated/admin/logs'
@@ -456,6 +469,13 @@ declare module '@tanstack/react-router' {
       path: '/audit'
       fullPath: '/admin/audit'
       preLoaderRoute: typeof AuthenticatedAdminAuditRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/diagnose': {
+      id: '/_authenticated/admin/diagnose'
+      path: '/diagnose'
+      fullPath: '/admin/diagnose'
+      preLoaderRoute: typeof AuthenticatedAdminDiagnoseRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/docs': {
@@ -638,6 +658,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAuditRoute: typeof AuthenticatedAdminAuditRoute
+  AuthenticatedAdminDiagnoseRoute: typeof AuthenticatedAdminDiagnoseRoute
   AuthenticatedAdminDocsRoute: typeof AuthenticatedAdminDocsRoute
   AuthenticatedAdminKeysRoute: typeof AuthenticatedAdminKeysRoute
   AuthenticatedAdminLogsRoute: typeof AuthenticatedAdminLogsRoute
@@ -650,6 +671,7 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAuditRoute: AuthenticatedAdminAuditRoute,
+  AuthenticatedAdminDiagnoseRoute: AuthenticatedAdminDiagnoseRoute,
   AuthenticatedAdminDocsRoute: AuthenticatedAdminDocsRoute,
   AuthenticatedAdminKeysRoute: AuthenticatedAdminKeysRoute,
   AuthenticatedAdminLogsRoute: AuthenticatedAdminLogsRoute,
