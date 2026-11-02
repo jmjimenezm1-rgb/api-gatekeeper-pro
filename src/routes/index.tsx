@@ -67,6 +67,13 @@ function Index() {
             </a>
           </Button>
         </div>
+        <div className="mt-6 flex flex-wrap gap-2 text-sm">
+          <span className="text-muted-foreground">Otros módulos:</span>
+          <Link to="/aprovisionamiento" className="font-medium text-primary hover:underline">Aprovisionamiento</Link>
+          <Link to="/portal" className="font-medium text-primary hover:underline">Portal cliente</Link>
+          <Link to="/integraciones" className="font-medium text-primary hover:underline">Integraciones</Link>
+          <Link to="/inicio-onboarding" className="font-medium text-primary hover:underline">Inicio Onboarding</Link>
+        </div>
 
         <section className="mt-16 grid gap-4 sm:grid-cols-2">
           {FEATURES.map((feature) => (

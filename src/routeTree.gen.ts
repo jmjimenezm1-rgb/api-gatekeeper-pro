@@ -13,6 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAprovisionamientoRouteImport } from './routes/_authenticated/aprovisionamiento'
+import { Route as AuthenticatedInicioOnboardingRouteImport } from './routes/_authenticated/inicio-onboarding'
+import { Route as AuthenticatedIntegracionesRouteImport } from './routes/_authenticated/integraciones'
+import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminDiagnoseRouteImport } from './routes/_authenticated/admin.diagnose'
@@ -23,8 +27,24 @@ import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as AuthenticatedAdminVersionsRouteImport } from './routes/_authenticated/admin.versions'
+import { Route as AuthenticatedAprovisionamientoIndexRouteImport } from './routes/_authenticated/aprovisionamiento.index'
+import { Route as AuthenticatedAprovisionamientoConectoresRouteImport } from './routes/_authenticated/aprovisionamiento.conectores'
+import { Route as AuthenticatedAprovisionamientoHistorialRouteImport } from './routes/_authenticated/aprovisionamiento.historial'
+import { Route as AuthenticatedAprovisionamientoReglasRouteImport } from './routes/_authenticated/aprovisionamiento.reglas'
+import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
+import { Route as AuthenticatedPortalAplicacionesRouteImport } from './routes/_authenticated/portal.aplicaciones'
+import { Route as AuthenticatedPortalConsumoRouteImport } from './routes/_authenticated/portal.consumo'
+import { Route as AuthenticatedPortalDocumentosRouteImport } from './routes/_authenticated/portal.documentos'
+import { Route as AuthenticatedPortalFacturacionRouteImport } from './routes/_authenticated/portal.facturacion'
+import { Route as AuthenticatedPortalNotificacionesRouteImport } from './routes/_authenticated/portal.notificaciones'
+import { Route as AuthenticatedPortalPerfilRouteImport } from './routes/_authenticated/portal.perfil'
+import { Route as AuthenticatedPortalSeguridadRouteImport } from './routes/_authenticated/portal.seguridad'
+import { Route as AuthenticatedPortalSoporteRouteImport } from './routes/_authenticated/portal.soporte'
+import { Route as AuthenticatedPortalUsuariosRouteImport } from './routes/_authenticated/portal.usuarios'
 import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
 import { Route as ApiPublicOpenapiDotjsonRouteImport } from './routes/api/public/openapi[.]json'
+import { Route as AuthenticatedAprovisionamientoSolicitudesIndexRouteImport } from './routes/_authenticated/aprovisionamiento.solicitudes.index'
+import { Route as AuthenticatedAprovisionamientoSolicitudesIdRouteImport } from './routes/_authenticated/aprovisionamiento.solicitudes.$id'
 import { Route as ApiPublicV1PermissionsRouteImport } from './routes/api/public/v1/permissions'
 import { Route as ApiPublicV1RolesRouteImport } from './routes/api/public/v1/roles'
 import { Route as ApiPublicV1UsersRouteImport } from './routes/api/public/v1/users'
@@ -59,6 +79,29 @@ const AuthRoute = AuthRouteImport.update({
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAprovisionamientoRoute =
+  AuthenticatedAprovisionamientoRouteImport.update({
+    id: '/aprovisionamiento',
+    path: '/aprovisionamiento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedInicioOnboardingRoute =
+  AuthenticatedInicioOnboardingRouteImport.update({
+    id: '/inicio-onboarding',
+    path: '/inicio-onboarding',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedIntegracionesRoute =
+  AuthenticatedIntegracionesRouteImport.update({
+    id: '/integraciones',
+    path: '/integraciones',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
@@ -114,6 +157,90 @@ const AuthenticatedAdminVersionsRoute =
     path: '/versions',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAprovisionamientoIndexRoute =
+  AuthenticatedAprovisionamientoIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
+const AuthenticatedAprovisionamientoConectoresRoute =
+  AuthenticatedAprovisionamientoConectoresRouteImport.update({
+    id: '/conectores',
+    path: '/conectores',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
+const AuthenticatedAprovisionamientoHistorialRoute =
+  AuthenticatedAprovisionamientoHistorialRouteImport.update({
+    id: '/historial',
+    path: '/historial',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
+const AuthenticatedAprovisionamientoReglasRoute =
+  AuthenticatedAprovisionamientoReglasRouteImport.update({
+    id: '/reglas',
+    path: '/reglas',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
+const AuthenticatedPortalIndexRoute =
+  AuthenticatedPortalIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalAplicacionesRoute =
+  AuthenticatedPortalAplicacionesRouteImport.update({
+    id: '/aplicaciones',
+    path: '/aplicaciones',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalConsumoRoute =
+  AuthenticatedPortalConsumoRouteImport.update({
+    id: '/consumo',
+    path: '/consumo',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalDocumentosRoute =
+  AuthenticatedPortalDocumentosRouteImport.update({
+    id: '/documentos',
+    path: '/documentos',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalFacturacionRoute =
+  AuthenticatedPortalFacturacionRouteImport.update({
+    id: '/facturacion',
+    path: '/facturacion',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalNotificacionesRoute =
+  AuthenticatedPortalNotificacionesRouteImport.update({
+    id: '/notificaciones',
+    path: '/notificaciones',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalPerfilRoute =
+  AuthenticatedPortalPerfilRouteImport.update({
+    id: '/perfil',
+    path: '/perfil',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalSeguridadRoute =
+  AuthenticatedPortalSeguridadRouteImport.update({
+    id: '/seguridad',
+    path: '/seguridad',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalSoporteRoute =
+  AuthenticatedPortalSoporteRouteImport.update({
+    id: '/soporte',
+    path: '/soporte',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
+const AuthenticatedPortalUsuariosRoute =
+  AuthenticatedPortalUsuariosRouteImport.update({
+    id: '/usuarios',
+    path: '/usuarios',
+    getParentRoute: () => AuthenticatedPortalRoute,
+  } as any)
 const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
   id: '/api/public/health',
   path: '/api/public/health',
@@ -124,6 +251,18 @@ const ApiPublicOpenapiDotjsonRoute = ApiPublicOpenapiDotjsonRouteImport.update({
   path: '/api/public/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAprovisionamientoSolicitudesIndexRoute =
+  AuthenticatedAprovisionamientoSolicitudesIndexRouteImport.update({
+    id: '/solicitudes/',
+    path: '/solicitudes/',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
+const AuthenticatedAprovisionamientoSolicitudesIdRoute =
+  AuthenticatedAprovisionamientoSolicitudesIdRouteImport.update({
+    id: '/solicitudes/$id',
+    path: '/solicitudes/$id',
+    getParentRoute: () => AuthenticatedAprovisionamientoRoute,
+  } as any)
 const ApiPublicV1PermissionsRoute = ApiPublicV1PermissionsRouteImport.update({
   id: '/api/public/v1/permissions',
   path: '/api/public/v1/permissions',
@@ -213,6 +352,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/aprovisionamiento': typeof AuthenticatedAprovisionamientoRouteWithChildren
+  '/inicio-onboarding': typeof AuthenticatedInicioOnboardingRoute
+  '/integraciones': typeof AuthenticatedIntegracionesRoute
+  '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/admin/docs': typeof AuthenticatedAdminDocsRoute
@@ -222,9 +365,24 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/aprovisionamiento/conectores': typeof AuthenticatedAprovisionamientoConectoresRoute
+  '/aprovisionamiento/historial': typeof AuthenticatedAprovisionamientoHistorialRoute
+  '/aprovisionamiento/reglas': typeof AuthenticatedAprovisionamientoReglasRoute
+  '/portal/aplicaciones': typeof AuthenticatedPortalAplicacionesRoute
+  '/portal/consumo': typeof AuthenticatedPortalConsumoRoute
+  '/portal/documentos': typeof AuthenticatedPortalDocumentosRoute
+  '/portal/facturacion': typeof AuthenticatedPortalFacturacionRoute
+  '/portal/notificaciones': typeof AuthenticatedPortalNotificacionesRoute
+  '/portal/perfil': typeof AuthenticatedPortalPerfilRoute
+  '/portal/seguridad': typeof AuthenticatedPortalSeguridadRoute
+  '/portal/soporte': typeof AuthenticatedPortalSoporteRoute
+  '/portal/usuarios': typeof AuthenticatedPortalUsuariosRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/aprovisionamiento/': typeof AuthenticatedAprovisionamientoIndexRoute
+  '/portal/': typeof AuthenticatedPortalIndexRoute
+  '/aprovisionamiento/solicitudes/$id': typeof AuthenticatedAprovisionamientoSolicitudesIdRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -233,6 +391,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
   '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
   '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
+  '/aprovisionamiento/solicitudes/': typeof AuthenticatedAprovisionamientoSolicitudesIndexRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -245,6 +404,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/inicio-onboarding': typeof AuthenticatedInicioOnboardingRoute
+  '/integraciones': typeof AuthenticatedIntegracionesRoute
   '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/admin/docs': typeof AuthenticatedAdminDocsRoute
@@ -254,9 +415,24 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/aprovisionamiento/conectores': typeof AuthenticatedAprovisionamientoConectoresRoute
+  '/aprovisionamiento/historial': typeof AuthenticatedAprovisionamientoHistorialRoute
+  '/aprovisionamiento/reglas': typeof AuthenticatedAprovisionamientoReglasRoute
+  '/portal/aplicaciones': typeof AuthenticatedPortalAplicacionesRoute
+  '/portal/consumo': typeof AuthenticatedPortalConsumoRoute
+  '/portal/documentos': typeof AuthenticatedPortalDocumentosRoute
+  '/portal/facturacion': typeof AuthenticatedPortalFacturacionRoute
+  '/portal/notificaciones': typeof AuthenticatedPortalNotificacionesRoute
+  '/portal/perfil': typeof AuthenticatedPortalPerfilRoute
+  '/portal/seguridad': typeof AuthenticatedPortalSeguridadRoute
+  '/portal/soporte': typeof AuthenticatedPortalSoporteRoute
+  '/portal/usuarios': typeof AuthenticatedPortalUsuariosRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/aprovisionamiento': typeof AuthenticatedAprovisionamientoIndexRoute
+  '/portal': typeof AuthenticatedPortalIndexRoute
+  '/aprovisionamiento/solicitudes/$id': typeof AuthenticatedAprovisionamientoSolicitudesIdRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -265,6 +441,7 @@ export interface FileRoutesByTo {
   '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
   '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
   '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
+  '/aprovisionamiento/solicitudes': typeof AuthenticatedAprovisionamientoSolicitudesIndexRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -280,6 +457,10 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/aprovisionamiento': typeof AuthenticatedAprovisionamientoRouteWithChildren
+  '/_authenticated/inicio-onboarding': typeof AuthenticatedInicioOnboardingRoute
+  '/_authenticated/integraciones': typeof AuthenticatedIntegracionesRoute
+  '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
   '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/diagnose': typeof AuthenticatedAdminDiagnoseRoute
   '/_authenticated/admin/docs': typeof AuthenticatedAdminDocsRoute
@@ -289,9 +470,24 @@ export interface FileRoutesById {
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/admin/versions': typeof AuthenticatedAdminVersionsRoute
+  '/_authenticated/aprovisionamiento/conectores': typeof AuthenticatedAprovisionamientoConectoresRoute
+  '/_authenticated/aprovisionamiento/historial': typeof AuthenticatedAprovisionamientoHistorialRoute
+  '/_authenticated/aprovisionamiento/reglas': typeof AuthenticatedAprovisionamientoReglasRoute
+  '/_authenticated/portal/aplicaciones': typeof AuthenticatedPortalAplicacionesRoute
+  '/_authenticated/portal/consumo': typeof AuthenticatedPortalConsumoRoute
+  '/_authenticated/portal/documentos': typeof AuthenticatedPortalDocumentosRoute
+  '/_authenticated/portal/facturacion': typeof AuthenticatedPortalFacturacionRoute
+  '/_authenticated/portal/notificaciones': typeof AuthenticatedPortalNotificacionesRoute
+  '/_authenticated/portal/perfil': typeof AuthenticatedPortalPerfilRoute
+  '/_authenticated/portal/seguridad': typeof AuthenticatedPortalSeguridadRoute
+  '/_authenticated/portal/soporte': typeof AuthenticatedPortalSoporteRoute
+  '/_authenticated/portal/usuarios': typeof AuthenticatedPortalUsuariosRoute
   '/api/public/health': typeof ApiPublicHealthRoute
   '/api/public/openapi.json': typeof ApiPublicOpenapiDotjsonRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/aprovisionamiento/': typeof AuthenticatedAprovisionamientoIndexRoute
+  '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
+  '/_authenticated/aprovisionamiento/solicitudes/$id': typeof AuthenticatedAprovisionamientoSolicitudesIdRoute
   '/api/public/v1/permissions': typeof ApiPublicV1PermissionsRoute
   '/api/public/v1/roles': typeof ApiPublicV1RolesRoute
   '/api/public/v1/users': typeof ApiPublicV1UsersRouteWithChildren
@@ -300,6 +496,7 @@ export interface FileRoutesById {
   '/api/public/v2/roles': typeof ApiPublicV2RolesRoute
   '/api/public/v2/users': typeof ApiPublicV2UsersRouteWithChildren
   '/api/public/v2/versions': typeof ApiPublicV2VersionsRoute
+  '/_authenticated/aprovisionamiento/solicitudes/': typeof AuthenticatedAprovisionamientoSolicitudesIndexRoute
   '/api/public/v1/users/$id/permissions': typeof ApiPublicV1UsersIdPermissionsRoute
   '/api/public/v1/users/$id/roles': typeof ApiPublicV1UsersIdRolesRoute
   '/api/public/v1/users/$id/status': typeof ApiPublicV1UsersIdStatusRoute
@@ -315,6 +512,10 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin'
+    | '/aprovisionamiento'
+    | '/inicio-onboarding'
+    | '/integraciones'
+    | '/portal'
     | '/admin/audit'
     | '/admin/diagnose'
     | '/admin/docs'
@@ -324,9 +525,24 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/versions'
+    | '/aprovisionamiento/conectores'
+    | '/aprovisionamiento/historial'
+    | '/aprovisionamiento/reglas'
+    | '/portal/aplicaciones'
+    | '/portal/consumo'
+    | '/portal/documentos'
+    | '/portal/facturacion'
+    | '/portal/notificaciones'
+    | '/portal/perfil'
+    | '/portal/seguridad'
+    | '/portal/soporte'
+    | '/portal/usuarios'
     | '/api/public/health'
     | '/api/public/openapi.json'
     | '/admin/'
+    | '/aprovisionamiento/'
+    | '/portal/'
+    | '/aprovisionamiento/solicitudes/$id'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -335,6 +551,7 @@ export interface FileRouteTypes {
     | '/api/public/v2/roles'
     | '/api/public/v2/users'
     | '/api/public/v2/versions'
+    | '/aprovisionamiento/solicitudes/'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -347,6 +564,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/inicio-onboarding'
+    | '/integraciones'
     | '/admin/audit'
     | '/admin/diagnose'
     | '/admin/docs'
@@ -356,9 +575,24 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/admin/versions'
+    | '/aprovisionamiento/conectores'
+    | '/aprovisionamiento/historial'
+    | '/aprovisionamiento/reglas'
+    | '/portal/aplicaciones'
+    | '/portal/consumo'
+    | '/portal/documentos'
+    | '/portal/facturacion'
+    | '/portal/notificaciones'
+    | '/portal/perfil'
+    | '/portal/seguridad'
+    | '/portal/soporte'
+    | '/portal/usuarios'
     | '/api/public/health'
     | '/api/public/openapi.json'
     | '/admin'
+    | '/aprovisionamiento'
+    | '/portal'
+    | '/aprovisionamiento/solicitudes/$id'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -367,6 +601,7 @@ export interface FileRouteTypes {
     | '/api/public/v2/roles'
     | '/api/public/v2/users'
     | '/api/public/v2/versions'
+    | '/aprovisionamiento/solicitudes'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -381,6 +616,10 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/admin'
+    | '/_authenticated/aprovisionamiento'
+    | '/_authenticated/inicio-onboarding'
+    | '/_authenticated/integraciones'
+    | '/_authenticated/portal'
     | '/_authenticated/admin/audit'
     | '/_authenticated/admin/diagnose'
     | '/_authenticated/admin/docs'
@@ -390,9 +629,24 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/users'
     | '/_authenticated/admin/versions'
+    | '/_authenticated/aprovisionamiento/conectores'
+    | '/_authenticated/aprovisionamiento/historial'
+    | '/_authenticated/aprovisionamiento/reglas'
+    | '/_authenticated/portal/aplicaciones'
+    | '/_authenticated/portal/consumo'
+    | '/_authenticated/portal/documentos'
+    | '/_authenticated/portal/facturacion'
+    | '/_authenticated/portal/notificaciones'
+    | '/_authenticated/portal/perfil'
+    | '/_authenticated/portal/seguridad'
+    | '/_authenticated/portal/soporte'
+    | '/_authenticated/portal/usuarios'
     | '/api/public/health'
     | '/api/public/openapi.json'
     | '/_authenticated/admin/'
+    | '/_authenticated/aprovisionamiento/'
+    | '/_authenticated/portal/'
+    | '/_authenticated/aprovisionamiento/solicitudes/$id'
     | '/api/public/v1/permissions'
     | '/api/public/v1/roles'
     | '/api/public/v1/users'
@@ -401,6 +655,7 @@ export interface FileRouteTypes {
     | '/api/public/v2/roles'
     | '/api/public/v2/users'
     | '/api/public/v2/versions'
+    | '/_authenticated/aprovisionamiento/solicitudes/'
     | '/api/public/v1/users/$id/permissions'
     | '/api/public/v1/users/$id/roles'
     | '/api/public/v1/users/$id/status'
@@ -455,6 +710,34 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/aprovisionamiento': {
+      id: '/_authenticated/aprovisionamiento'
+      path: '/aprovisionamiento'
+      fullPath: '/aprovisionamiento'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/inicio-onboarding': {
+      id: '/_authenticated/inicio-onboarding'
+      path: '/inicio-onboarding'
+      fullPath: '/inicio-onboarding'
+      preLoaderRoute: typeof AuthenticatedInicioOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/integraciones': {
+      id: '/_authenticated/integraciones'
+      path: '/integraciones'
+      fullPath: '/integraciones'
+      preLoaderRoute: typeof AuthenticatedIntegracionesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal': {
+      id: '/_authenticated/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof AuthenticatedPortalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/': {
@@ -527,6 +810,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminVersionsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/aprovisionamiento/': {
+      id: '/_authenticated/aprovisionamiento/'
+      path: '/'
+      fullPath: '/aprovisionamiento/'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoIndexRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
+    }
+    '/_authenticated/aprovisionamiento/conectores': {
+      id: '/_authenticated/aprovisionamiento/conectores'
+      path: '/conectores'
+      fullPath: '/aprovisionamiento/conectores'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoConectoresRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
+    }
+    '/_authenticated/aprovisionamiento/historial': {
+      id: '/_authenticated/aprovisionamiento/historial'
+      path: '/historial'
+      fullPath: '/aprovisionamiento/historial'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoHistorialRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
+    }
+    '/_authenticated/aprovisionamiento/reglas': {
+      id: '/_authenticated/aprovisionamiento/reglas'
+      path: '/reglas'
+      fullPath: '/aprovisionamiento/reglas'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoReglasRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
+    }
+    '/_authenticated/portal/': {
+      id: '/_authenticated/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof AuthenticatedPortalIndexRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/aplicaciones': {
+      id: '/_authenticated/portal/aplicaciones'
+      path: '/aplicaciones'
+      fullPath: '/portal/aplicaciones'
+      preLoaderRoute: typeof AuthenticatedPortalAplicacionesRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/consumo': {
+      id: '/_authenticated/portal/consumo'
+      path: '/consumo'
+      fullPath: '/portal/consumo'
+      preLoaderRoute: typeof AuthenticatedPortalConsumoRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/documentos': {
+      id: '/_authenticated/portal/documentos'
+      path: '/documentos'
+      fullPath: '/portal/documentos'
+      preLoaderRoute: typeof AuthenticatedPortalDocumentosRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/facturacion': {
+      id: '/_authenticated/portal/facturacion'
+      path: '/facturacion'
+      fullPath: '/portal/facturacion'
+      preLoaderRoute: typeof AuthenticatedPortalFacturacionRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/notificaciones': {
+      id: '/_authenticated/portal/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/portal/notificaciones'
+      preLoaderRoute: typeof AuthenticatedPortalNotificacionesRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/perfil': {
+      id: '/_authenticated/portal/perfil'
+      path: '/perfil'
+      fullPath: '/portal/perfil'
+      preLoaderRoute: typeof AuthenticatedPortalPerfilRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/seguridad': {
+      id: '/_authenticated/portal/seguridad'
+      path: '/seguridad'
+      fullPath: '/portal/seguridad'
+      preLoaderRoute: typeof AuthenticatedPortalSeguridadRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/soporte': {
+      id: '/_authenticated/portal/soporte'
+      path: '/soporte'
+      fullPath: '/portal/soporte'
+      preLoaderRoute: typeof AuthenticatedPortalSoporteRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
+    '/_authenticated/portal/usuarios': {
+      id: '/_authenticated/portal/usuarios'
+      path: '/usuarios'
+      fullPath: '/portal/usuarios'
+      preLoaderRoute: typeof AuthenticatedPortalUsuariosRouteImport
+      parentRoute: typeof AuthenticatedPortalRoute
+    }
     '/api/public/health': {
       id: '/api/public/health'
       path: '/api/public/health'
@@ -540,6 +921,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/public/openapi.json'
       preLoaderRoute: typeof ApiPublicOpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/aprovisionamiento/solicitudes/': {
+      id: '/_authenticated/aprovisionamiento/solicitudes/'
+      path: '/solicitudes'
+      fullPath: '/aprovisionamiento/solicitudes/'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoSolicitudesIndexRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
+    }
+    '/_authenticated/aprovisionamiento/solicitudes/$id': {
+      id: '/_authenticated/aprovisionamiento/solicitudes/$id'
+      path: '/solicitudes/$id'
+      fullPath: '/aprovisionamiento/solicitudes/$id'
+      preLoaderRoute: typeof AuthenticatedAprovisionamientoSolicitudesIdRouteImport
+      parentRoute: typeof AuthenticatedAprovisionamientoRoute
     }
     '/api/public/v1/permissions': {
       id: '/api/public/v1/permissions'
@@ -685,12 +1080,81 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
 const AuthenticatedAdminRouteWithChildren =
   AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
 
+interface AuthenticatedAprovisionamientoRouteChildren {
+  AuthenticatedAprovisionamientoConectoresRoute: typeof AuthenticatedAprovisionamientoConectoresRoute
+  AuthenticatedAprovisionamientoHistorialRoute: typeof AuthenticatedAprovisionamientoHistorialRoute
+  AuthenticatedAprovisionamientoReglasRoute: typeof AuthenticatedAprovisionamientoReglasRoute
+  AuthenticatedAprovisionamientoIndexRoute: typeof AuthenticatedAprovisionamientoIndexRoute
+  AuthenticatedAprovisionamientoSolicitudesIdRoute: typeof AuthenticatedAprovisionamientoSolicitudesIdRoute
+  AuthenticatedAprovisionamientoSolicitudesIndexRoute: typeof AuthenticatedAprovisionamientoSolicitudesIndexRoute
+}
+
+const AuthenticatedAprovisionamientoRouteChildren: AuthenticatedAprovisionamientoRouteChildren =
+  {
+    AuthenticatedAprovisionamientoConectoresRoute:
+      AuthenticatedAprovisionamientoConectoresRoute,
+    AuthenticatedAprovisionamientoHistorialRoute:
+      AuthenticatedAprovisionamientoHistorialRoute,
+    AuthenticatedAprovisionamientoReglasRoute:
+      AuthenticatedAprovisionamientoReglasRoute,
+    AuthenticatedAprovisionamientoIndexRoute:
+      AuthenticatedAprovisionamientoIndexRoute,
+    AuthenticatedAprovisionamientoSolicitudesIdRoute:
+      AuthenticatedAprovisionamientoSolicitudesIdRoute,
+    AuthenticatedAprovisionamientoSolicitudesIndexRoute:
+      AuthenticatedAprovisionamientoSolicitudesIndexRoute,
+  }
+
+const AuthenticatedAprovisionamientoRouteWithChildren =
+  AuthenticatedAprovisionamientoRoute._addFileChildren(
+    AuthenticatedAprovisionamientoRouteChildren,
+  )
+
+interface AuthenticatedPortalRouteChildren {
+  AuthenticatedPortalAplicacionesRoute: typeof AuthenticatedPortalAplicacionesRoute
+  AuthenticatedPortalConsumoRoute: typeof AuthenticatedPortalConsumoRoute
+  AuthenticatedPortalDocumentosRoute: typeof AuthenticatedPortalDocumentosRoute
+  AuthenticatedPortalFacturacionRoute: typeof AuthenticatedPortalFacturacionRoute
+  AuthenticatedPortalNotificacionesRoute: typeof AuthenticatedPortalNotificacionesRoute
+  AuthenticatedPortalPerfilRoute: typeof AuthenticatedPortalPerfilRoute
+  AuthenticatedPortalSeguridadRoute: typeof AuthenticatedPortalSeguridadRoute
+  AuthenticatedPortalSoporteRoute: typeof AuthenticatedPortalSoporteRoute
+  AuthenticatedPortalUsuariosRoute: typeof AuthenticatedPortalUsuariosRoute
+  AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
+}
+
+const AuthenticatedPortalRouteChildren: AuthenticatedPortalRouteChildren = {
+  AuthenticatedPortalAplicacionesRoute: AuthenticatedPortalAplicacionesRoute,
+  AuthenticatedPortalConsumoRoute: AuthenticatedPortalConsumoRoute,
+  AuthenticatedPortalDocumentosRoute: AuthenticatedPortalDocumentosRoute,
+  AuthenticatedPortalFacturacionRoute: AuthenticatedPortalFacturacionRoute,
+  AuthenticatedPortalNotificacionesRoute:
+    AuthenticatedPortalNotificacionesRoute,
+  AuthenticatedPortalPerfilRoute: AuthenticatedPortalPerfilRoute,
+  AuthenticatedPortalSeguridadRoute: AuthenticatedPortalSeguridadRoute,
+  AuthenticatedPortalSoporteRoute: AuthenticatedPortalSoporteRoute,
+  AuthenticatedPortalUsuariosRoute: AuthenticatedPortalUsuariosRoute,
+  AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
+}
+
+const AuthenticatedPortalRouteWithChildren =
+  AuthenticatedPortalRoute._addFileChildren(AuthenticatedPortalRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedAprovisionamientoRoute: typeof AuthenticatedAprovisionamientoRouteWithChildren
+  AuthenticatedInicioOnboardingRoute: typeof AuthenticatedInicioOnboardingRoute
+  AuthenticatedIntegracionesRoute: typeof AuthenticatedIntegracionesRoute
+  AuthenticatedPortalRoute: typeof AuthenticatedPortalRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedAprovisionamientoRoute:
+    AuthenticatedAprovisionamientoRouteWithChildren,
+  AuthenticatedInicioOnboardingRoute: AuthenticatedInicioOnboardingRoute,
+  AuthenticatedIntegracionesRoute: AuthenticatedIntegracionesRoute,
+  AuthenticatedPortalRoute: AuthenticatedPortalRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
