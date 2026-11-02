@@ -1,3 +1,4 @@
+import { PlatformBar } from "@/components/layout/PlatformBar";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader, SectionCard, StatusPill } from "@/components/common/ui-bits";
@@ -23,6 +24,8 @@ export const Route = createFileRoute("/_authenticated/integraciones")({
 
 function Integraciones() {
   return (
+    <div className="onboarding-scope min-h-screen">
+    <PlatformBar />
     <main className="mx-auto max-w-5xl px-5 py-10">
       <PageHeader titulo="Contratos de integración (API First)" descripcion={descripcion} />
       <div className="space-y-4">
@@ -72,5 +75,6 @@ function Integraciones() {
         ))}
       </div>
     </main>
+    </div>
   );
 }

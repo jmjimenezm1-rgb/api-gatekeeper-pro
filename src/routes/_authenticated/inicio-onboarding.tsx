@@ -1,3 +1,4 @@
+import { PlatformBar } from "@/components/layout/PlatformBar";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Boxes, Building2, GitBranch, ShieldCheck, Workflow } from "lucide-react";
 
@@ -40,7 +41,8 @@ const modulos = [
 
 function Index() {
   return (
-    <div className="min-h-screen">
+    <div className="onboarding-scope min-h-screen">
+      <PlatformBar />
       <header className="grid-hero border-b border-border">
         <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">

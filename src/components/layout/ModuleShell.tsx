@@ -1,3 +1,4 @@
+import { PlatformBar } from "./PlatformBar";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Search, Bell, ChevronLeft, type LucideIcon } from "lucide-react";
 import { useState } from "react";
@@ -95,10 +96,11 @@ export function ModuleShell({ moduleName, moduleTag, nav, context, children }: M
   );
 
   return (
-    <div className="min-h-screen bg-background lg:grid lg:grid-cols-[16rem_1fr]">
+    <div className="onboarding-scope min-h-screen bg-background lg:grid lg:grid-cols-[16rem_1fr]">
       <aside className="sticky top-0 hidden h-screen lg:block">{aside}</aside>
 
       <div className="flex min-w-0 flex-col">
+        <PlatformBar />
         <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/85 px-4 py-3 backdrop-blur md:px-6">
           <Sheet open={navigationOpen} onOpenChange={setNavigationOpen}>
             <SheetTrigger asChild>

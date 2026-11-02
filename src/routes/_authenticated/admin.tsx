@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 
+import { PlatformBar } from "@/components/layout/PlatformBar";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { getMyAccess } from "@/modules/api-management/admin/admin.functions";
@@ -38,6 +39,7 @@ function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PlatformBar />
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <Link to="/admin" className="text-sm font-semibold tracking-tight text-foreground">
