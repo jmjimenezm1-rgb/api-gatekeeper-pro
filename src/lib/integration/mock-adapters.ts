@@ -130,6 +130,14 @@ export const mockPorts: PlatformPorts = {
   audit: {
     async record(input) {
       publish("auditoria.registro", input, { emisor: "core", tenantId: input.tenantId });
+      try {
+        const { recordPlatformAudit } = await import("./audit.functions");
+        await recordPlatformAudit({
+          data: { accion: input.accion, entidad: input.entidad, tenantId: input.tenantId, detalle: input.detalle, modulo: "aprovisionamiento" },
+        });
+      } catch (error) {
+        console.error("[onboarding] auditoría común no disponible", error);
+      }
     },
   },
   accounting: {
